@@ -1,0 +1,2 @@
+- setup and save model API keys to .env
+- create a workbench
