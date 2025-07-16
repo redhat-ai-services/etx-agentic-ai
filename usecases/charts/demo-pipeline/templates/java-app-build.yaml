@@ -65,19 +65,23 @@ spec:
   finally:
   - name: triggeragent
     params:
-    - name: aggregateTaskStatus
-      value: "$(tasks.status)"
-    taskSpec:
+    - name: SCRIPT
+      value: |
+        if [ $(tasks.status) == "Failed" ]
+        then
+          set -Bx
+          echo "Looks like your pipeline failed dumbass, let's find where you messed up"
+          failed_pod=$(oc get pods --field-selector="status.phase=Failed" --sort-by="status.startTime" | grep -v "triggeragent" | grep "java-app-build" | tail -n 1 | awk '{print $1}')
+          curl -i -H "Content-Type: application/json" -X POST -d \{\"namespace\":\"{{ .Release.Namespace }}\",\"pod\":\"${failed_pod}\"\} {{ .Values.agent_endpoint }}
+        fi 
+    taskRef:
       params:
-      - name: aggregateTaskStatus
-      steps: 
-      - name: check-task-status
-        image: ubi9/ubi
-        script: |
-          if [ $(params.aggregateTaskStatus) == "Failed" ]
-          then
-            echo "Looks like your pipeline failed dumbass, calling Doctor Mix"
-            curl -i -H "Content-Type: application/json" -X POST -d '{"namespace":"{{ .Release.Namespace }}"}' {{ .Values.agent_endpoint }}
-          fi 
+      - name: kind
+        value: task
+      - name: name
+        value: openshift-client
+      - name: namespace
+        value: openshift-pipelines
+      resolver: cluster
   workspaces:
   - name: shared-workspace
