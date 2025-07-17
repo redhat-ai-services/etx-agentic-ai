@@ -1,3 +1,4 @@
+from os import environ
 from pprint import pprint
 
 from llama_stack_client import Agent, LlamaStackClient
@@ -9,25 +10,33 @@ from termcolor import cprint
 from utils import step_printer
 
 
-base_url = "http://llamastack-with-config-service.default.svc.cluster.local:8321"
-model_id = "granite-31-2b-instruct"
+llama_stack_url = environ.get(
+    'LLAMA_STACK_URL',
+    "http://llamastack-with-config-service.default.svc.cluster.local:8321"
+)
+model_id = environ.get('MODEL_ID', "granite-31-2b-instruct")
 model_prompt = """
 You are a helpful assistant. You have access to a number of tools.
 Whenever a tool is called, be sure to return the Response in a friendly and helpful tone.
 """
-temperature = 0.0
+temperature = float(environ.get('TEMPERATURE', '0.0'))
 strategy = {"type": "greedy"}
-max_tokens = 5000
-sampling_params = {
-    "strategy": strategy,
-    "max_tokens": max_tokens,
-}
-print(f"Inference Parameters:\n\tModel: {model_id}\n\tSampling Parameters: {sampling_params}")
+max_tokens = int(environ.get('MAX_TOKENS', '512'))
+client_timeout = float(environ.get('CLIENT_TIMEOUT', '600.0'))
+max_infer_iterations = int(environ.get('MAX_INFER_ITERATIONS', '10'))
+
+print(
+    f'Inference Parameters:\n\tModel: {model_id}\n'
+    f'Llama Stack URL: {llama_stack_url}\n'
+    f'Client timeout: {client_timeout}\n'
+    f'Max infer iterations: {max_infer_iterations}\n'
+    f'Temperature: {temperature}'
+)
 
 
 client = LlamaStackClient(
-    base_url=base_url,
-    timeout=600.0 # Default is 1 min which is far too little for some agentic tests, we set it to 10 min
+    base_url=llama_stack_url,
+    timeout=client_timeout # Default is 1 min which is far too little for some agentic tests, we set it to 10 min
 )
 models = client.models.list()
 print(f'registered models: {models}')
@@ -44,8 +53,8 @@ agent = ReActAgent(
         "type": "json_schema",
         "json_schema": ReActOutput.model_json_schema(),
     },
-    sampling_params={"max_tokens":512},
-    max_infer_iters=10
+    sampling_params={"max_tokens":max_tokens},
+    max_infer_iters=max_infer_iterations
 )
 print('instantiated ReAct agent')
 
