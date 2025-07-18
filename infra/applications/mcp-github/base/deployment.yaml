@@ -32,8 +32,8 @@ spec:
             secretKeyRef:
               name: github-credentials-v1
               key: token
-          - name: GITHUB_TOOLSETS
-            value: "all"
+        - name: GITHUB_TOOLSETS
+          value: "all"
         resources:
           limits:
             # cpu: "500m"
