@@ -1,6 +1,0 @@
-resources:
-  - namespace.yaml
-  - ../../base
-  #- load-model-job.yaml
-
-namespace: minio
