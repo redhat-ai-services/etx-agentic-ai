@@ -17,10 +17,6 @@ spec:
       - name: github-mcp-server-with-rh-nodejs
         image: quay.io/eformat/github-mcp-server:latest # quay.io/redhat-et/mcp-github:latest
         imagePullPolicy: Always
-        command: ["/bin/sh", "-c"]
-        args:
-        - |
-          npx -y supergateway --stdio "node dist/index.js" --port 8080
         ports:
         - containerPort: 8080
         env:
@@ -36,6 +32,8 @@ spec:
             secretKeyRef:
               name: github-credentials-v1
               key: token
+          - name: GITHUB_TOOLSETS
+            value: "all"
         resources:
           limits:
             # cpu: "500m"
