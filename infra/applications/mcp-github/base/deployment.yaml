@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: github-mcp-server-with-rh-nodejs
-        image: quay.io/redhat-et/mcp-github:latest
+        image: quay.io/eformat/github-mcp-server:latest # quay.io/redhat-et/mcp-github:latest
         imagePullPolicy: Always
         command: ["/bin/sh", "-c"]
         args:
@@ -27,6 +27,11 @@ spec:
         - name: NPM_CONFIG_CACHE
           value: /tmp/.npm
         - name: GITHUB_PERSONAL_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: github-credentials-v1
+              key: token
+        - name: GITHUB_TOKEN
           valueFrom:
             secretKeyRef:
               name: github-credentials-v1
