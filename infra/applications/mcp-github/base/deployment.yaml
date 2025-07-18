@@ -17,7 +17,7 @@ spec:
       - name: github-mcp-server-with-rh-nodejs
         image: quay.io/eformat/github-mcp-server:latest # quay.io/redhat-et/mcp-github:latest
         imagePullPolicy: Always
-        command: ["/mcp/github-mcp-server", "stdio"]
+        command: ["/mcp/run.sh"]
         ports:
         - containerPort: 8080
         env:
