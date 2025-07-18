@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: github-mcp-server-with-rh-nodejs
-        image: ghcr.io/github/github-mcp-server:latest # quay.io/eformat/github-mcp-server:latest # quay.io/redhat-et/mcp-github:latest
+        image: quay.io/eformat/github-mcp-server:latest # quay.io/redhat-et/mcp-github:latest
         imagePullPolicy: Always
         command: ["/mcp/github-mcp-server", "stdio"]
         ports:
