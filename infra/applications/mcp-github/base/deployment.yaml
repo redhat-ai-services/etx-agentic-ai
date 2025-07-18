@@ -21,8 +21,6 @@ spec:
         ports:
         - containerPort: 8080
         env:
-        - name: NPM_CONFIG_CACHE
-          value: /tmp/.npm
         - name: GITHUB_PERSONAL_ACCESS_TOKEN
           valueFrom:
             secretKeyRef:
