@@ -19,7 +19,7 @@ spec:
         imagePullPolicy: Always
         command: ["/mcp/run.sh"]
         ports:
-        - containerPort: 8080
+        - containerPort: 8000
         env:
         - name: GITHUB_PERSONAL_ACCESS_TOKEN
           valueFrom:
