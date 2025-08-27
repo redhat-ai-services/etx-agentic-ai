@@ -61,7 +61,7 @@ data:
       - provider_id: vllm
         provider_type: "remote::vllm"
         config:
-          url: "https://granite-31-2b-instruct-vllm-server.apps.sno.sandbox2010.opentlc.com/v1" # https://granite-31-2b-instruct.vllm-server.svc.cluster.local/v1
+          url: "https://granite-31-2b-instruct.vllm-server.svc.cluster.local/v1"
           tls_verify: false
       - provider_id: vllm-llama-3-2-3b
         provider_type: "remote::vllm"
