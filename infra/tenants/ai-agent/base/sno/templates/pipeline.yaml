@@ -12,7 +12,7 @@ spec:
   - default: image-registry.openshift-image-registry.svc:5000/ai-agent/ai-agent 
     name: IMAGE_NAME
     type: string
-  - default: https://github.com/redhat-ai-services/etx-agentic-ai.git
+  - default: {https://github.com/carlmes/etx-agentic-ai.git}
     name: GIT_REPO
     type: string
   - default: main 
@@ -100,7 +100,7 @@ spec:
             set -Bx
             echo "Looks like your pipeline failed dumbass, let's find where you messed up"
             failed_pod=$(oc get pods --field-selector="status.phase=Failed" --sort-by="status.startTime" | grep -v "trigger-agent" | grep "agent-service-build" | tail -n 1 | awk '{print $1}')
-            curl -i -H "Content-Type: application/json" -X POST -d "{\"namespace\":\"ai-agent\",\"pod_name\":\"${failed_pod}\",\"container_name\":\"step-buildah\"}" http://ai-agent:8000/webhook
+            curl -i -H "Content-Type: application/json" -X POST -d "{\"namespace\":\"ai-agent\",\"pod_name\":\"${failed_pod}\",\"container_name\":\"step-buildah\"}" http://ai-agent:8000/report-failure
           fi
   workspaces:
   - name: workspace
