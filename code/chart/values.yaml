@@ -2,7 +2,7 @@
 namespace: ai-agent
 registry: image-registry.openshift-image-registry.svc:5000
 application_name: ai-agent
-git_url: {https://github.com/carlmes/etx-agentic-ai.git}
+git_url: https://github.com/carlmes/etx-agentic-ai.git
 git_revision: main
 git_subdirectory: code
 agent_endpoint: http://ai-agent:8000/report-failure
