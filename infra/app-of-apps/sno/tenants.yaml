@@ -16,7 +16,7 @@ spec:
                   cluster.open-cluster-management.io/placement: placement-hub-openshift
               requeueAfterSeconds: 180
           - git:
-              repoURL: https://github.com/redhat-ai-services/etx-agentic-ai.git
+              repoURL: https://github.com/carlmes/etx-agentic-ai.git
               revision: main
               directories:
                 - path: infra/tenants/*/base/sno
@@ -33,7 +33,7 @@ spec:
         server: "{{.server}}"
         namespace: tenants
       source:
-        repoURL: https://github.com/redhat-ai-services/etx-agentic-ai.git
+        repoURL: https://github.com/carlmes/etx-agentic-ai.git
         path: "{{.path.path}}"
         plugin:
           name: argocd-novault-plugin-kustomize
