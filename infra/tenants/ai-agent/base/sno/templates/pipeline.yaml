@@ -12,7 +12,7 @@ spec:
   - default: image-registry.openshift-image-registry.svc:5000/ai-agent/ai-agent 
     name: IMAGE_NAME
     type: string
-  - default: {https://github.com/carlmes/etx-agentic-ai.git}
+  - default: https://github.com/carlmes/etx-agentic-ai.git
     name: GIT_REPO
     type: string
   - default: main 
