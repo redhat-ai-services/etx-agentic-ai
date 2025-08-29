@@ -1,6 +1,0 @@
-# mandatory unless a local deployment is used
-LLAMA_STACK_URL="http://llamastack-with-config-service.llama-stack.svc.cluster.local:8321"
-TEMPERATURE="0.0"
-MAX_TOKENS="6000"
-# models
-LLM_MODEL_ID="llama-4-scout-17b-16e-w4a16"
