@@ -26,7 +26,7 @@ spec:
         server: "{{.server}}"
         namespace: milvus
       source:
-        repoURL: https://github.com/carlmes/etx-agentic-ai.git
+        repoURL: https://github.com/redhat-ai-services/etx-agentic-ai.git
         path: infra/applications/milvus/overlay
         plugin:
           name: argocd-novault-plugin-kustomize

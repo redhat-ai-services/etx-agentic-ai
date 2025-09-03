@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: mcp-github
+  name: llama-stack-operator
   namespace: openshift-policy
 spec:
   goTemplate: true
@@ -17,7 +17,7 @@ spec:
     preserveResourcesOnDeletion: false
   template:
     metadata:
-      name: mcp-github-{{.name}}
+      name: llama-stack-operator-{{.name}}
       annotations:
         argocd.argoproj.io/compare-options: IgnoreExtraneous
     spec:
@@ -26,10 +26,10 @@ spec:
         server: "{{.server}}"
         namespace: openshift-policy
       source:
-        repoURL: https://github.com/carlmes/etx-agentic-ai.git
-        path: infra/applications/mcp-github/overlay
+        repoURL: https://github.com/redhat-ai-services/etx-agentic-ai.git
+        path: infra/applications/llama-stack-operator/overlay
         plugin:
-          name: argocd-vault-plugin-kustomize
+          name: argocd-novault-plugin-kustomize
         targetRevision: main
       syncPolicy:
         automated:
