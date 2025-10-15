@@ -160,7 +160,14 @@ collector:
             - otlphttp/dev
       telemetry:
         metrics:
-          address: 0.0.0.0:8888
+          level: basic
+          readers:
+            - pull:
+                exporter:
+                  prometheus:
+                    host: 0.0.0.0
+                    port: 8888
+
 
 # Tempo configuration for exporters
 tempo:
@@ -228,8 +235,14 @@ sidecars:
             receivers:
               - otlp
         telemetry:
-          metrics:
-            address: '0.0.0.0:8888'
+        metrics:
+          level: basic
+          readers:
+            - pull:
+                exporter:
+                  prometheus:
+                    host: 0.0.0.0
+                    port: 8888
     
     # Target allocator configuration
     targetAllocator:
@@ -297,8 +310,14 @@ sidecars:
               - otlp
         telemetry:
           metrics:
-            address: '0.0.0.0:8888'
-    
+            level: basic
+            readers:
+              - pull:
+                  exporter:
+                    prometheus:
+                      host: 0.0.0.0
+                      port: 8888
+
     # Target allocator configuration
     targetAllocator:
       allocationStrategy: consistent-hashing
