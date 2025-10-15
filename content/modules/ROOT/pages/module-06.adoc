@@ -178,7 +178,7 @@ To simulate a build failure and test the agent integration, use the pre-configur
 
 *Option 1: Web Console*
 
-1. In the OpenShift Web Console, navigate to **Pipelines** in the `demo-pipeline` namespace.
+1. In the OpenShift Web Console, navigate to **Pipelines** in the `ai-agent` namespace.
 2. Click on the `agent-service-build` pipeline.
 3. Click **Start** to create a new PipelineRun.
 4. In the parameters, set the `GIT_REVISION` value to `bad` to use the intentionally broken revision.
